@@ -5,8 +5,11 @@ pipeline {
         stage('Read JSON') {
             steps {
                 script {
-                    def jsonContent = readJSON(file: 'value.json')
-                    def criticalCount = jsonContent.criticalCount
+                    import groovy.json.JsonSlurper
+                    def jsonContent = readFile(file: 'value.json')
+                    def jsonSlurper = new JsonSlurper()
+                    def jsonData = jsonSlurper.parseText(jsonContent)
+                    def criticalCount = jsonData.criticalCount
                     if (criticalCount > 20) {
                         error("Critical Count is greater than 20. Stopping the pipeline.")
                     }
