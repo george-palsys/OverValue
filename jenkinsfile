@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Read JSON') {
+            steps {
+                script {
+                    def jsonContent = readJSON(file: 'config.json')
+                    def criticalCount = jsonContent.criticalCount
+                    if (criticalCount > 20) {
+                        error("Critical Count is greater than 20. Stopping the pipeline.")
+                    }
+                }
+            }
+        }
+
+    }
+}
+
