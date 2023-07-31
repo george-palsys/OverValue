@@ -6,7 +6,6 @@ pipeline {
             steps {
                 script {
                     def jsonContent = readFile(file: 'value.json')
-                    def jsonSlurper = new JsonSlurper()
                     def jsonData = jsonSlurper.parseText(jsonContent)
                     def criticalCount = jsonData.criticalCount
                     if (criticalCount > 20) {
