@@ -14,6 +14,12 @@ pipeline {
                 }
             }
         }
+        stage('Success Stage') {
+            steps {
+                echo "under 20"
+            }
+        }
+
     }
 }
 
